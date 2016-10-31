@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo List Exercise</title>
+    <script src="jquery.js"></script>
+    <script>
+    /*
+    Make a Todo List
+
+    0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
+    1. the ability to remove tasks (add an x button)
+    2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
+    3. the ability to delete a task
+    4. the ability to edit an existing task
+
+    */
+
+
+    // Add a new list
+    $(document).ready(function() {
+        $("#add-button").click(function() {
+            var new_list = $("#description").val();
+            $("#todo-list").append("<li>"+ "<input type='checkbox' id='check-box'>" + new_list + "<button id='remove-button'>X</button>" + "</li>");
+        });
+    });
+
+    // Remove a task
+    $(document).ready(function() {
+        $("#remove-button").click(function() {
+            $("li").remove();
+        });
+    });
+
+    // Delete a task
+    $(document).ready(function() {
+        $("#delete-button").click(function() {
+            $("li").remove();
+        });
+    });
+
+    // When you click the checkbox, change the background color
+    $(document).ready(function() {
+        $("#check-box").click(function(e) {
+            $("li").toggle({color: "black", backgroundColor: "yellow"});
+        });
+    });
+
+
+
+
+    </script>
+    <style>
+
+    #add-button{
+        font-size: 20px;
+        border-radius: 6px;
+        background-color: lightgray;
+        border: 0.2px solid lightgray;
+    }
+
+    #delete-button{
+        font-size: 10px;
+        background-color: red;
+        color: white;
+        border-radius: 4px;
+        border: 0.1px solid red;
+    }
+
+
+    #wrapper {
+      max-width: 480px;
+      margin: auto;
+      background-color: rgba(200,30,190,0.2);
+      border-radius: 4px;
+      padding: 30px;
+    }
+
+    #check-box{
+        margin-right: 5px;
+        font-size: 50px;
+    }
+
+    #description, #search, #todo-list {
+      font-size: 1.5em;
+    }
+
+    #description{
+        border-radius: 6px;
+        background-color: lightgray;
+    }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <input id="description" type="text" name="description" placeholder="Add a task">
+      <button id="add-button">Add Task</button>
+      <ul id="todo-list">
+        <li>Feed the cat <input type="checkbox" id="check-box"><button id="delete-button">X</button></li>
+      </ul>
+    </div>
+  </body>
+</html>
