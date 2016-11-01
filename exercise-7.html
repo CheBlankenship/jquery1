@@ -20,29 +20,51 @@
     // Add a new list
     $(document).ready(function() {
         $("#add-button").click(function() {
-            var new_list = $("#description").val();
-            $("#todo-list").append("<li>"+ "<input type='checkbox' id='check-box'>" + new_list + "<button id='remove-button'>X</button>" + "</li>");
+            var text = $('#description').val();
+            $('#todo-list').append('<li>' + text + '<input type="checkbox" id="check-box"><button id="remove-button">X</button></li>')
         });
     });
 
-    // Remove a task
-    $(document).ready(function() {
-        $("#remove-button").click(function() {
-            $("li").remove();
+    // Remove a list
+    $(document).ready(function(){
+        $("#todo-list").on("click", "#remove-button",function() {
+            $(this).parent("li").remove();
         });
     });
 
-    // Delete a task
+    // When you click the "Add Task" button, it automatically selects all the text. This makes easier for the user to type the next task in the input.
     $(document).ready(function() {
-        $("#delete-button").click(function() {
-            $("li").remove();
+        $('#add-button').click(function(){
+            $('#description').select();
         });
     });
 
-    // When you click the checkbox, change the background color
+    // Also, when you click the text todo-list
     $(document).ready(function() {
-        $("#check-box").click(function(e) {
-            $("li").toggle({color: "black", backgroundColor: "yellow"});
+        $('#description').click(function(){
+            $(this).select();
+        });
+    });
+
+    // When the user puts the check mark on the checkbox, it changes the background of the task.
+    $(document).ready(function() {
+        var yellow　= true;
+        $('#todo-list').on('click', '#check-box', function() {
+
+            $(this).parent('li').toggleClass("highlighted");
+            // if (yellow) {
+            //
+            //     $(this).parent('li').css({'color': 'black','background-color': 'rgba(255,255,0,0.3)'});
+            //     yellow = false;
+            //     console.log("var yellow is true now");
+            //
+            // }
+            //
+            // else {
+            //     console.log('var yellow is false now');
+            //     $(this).parent('li').css({'color': 'black','background-color': 'rgba(200,30,190,0.2)'});
+            //     yellow = true;
+            // }
         });
     });
 
@@ -59,7 +81,7 @@
         border: 0.2px solid lightgray;
     }
 
-    #delete-button{
+    #remove-button{
         font-size: 10px;
         background-color: red;
         color: white;
@@ -90,6 +112,10 @@
         background-color: lightgray;
     }
 
+    .highlighted {
+        background: rgba(200,30,190,0.2);
+    }
+
 
     </style>
   </head>
@@ -98,7 +124,7 @@
       <input id="description" type="text" name="description" placeholder="Add a task">
       <button id="add-button">Add Task</button>
       <ul id="todo-list">
-        <li>Feed the cat <input type="checkbox" id="check-box"><button id="delete-button">X</button></li>
+        <li>Feed the cat <input type="checkbox" id="check-box"><button id="remove-button">X</button></li>
       </ul>
     </div>
   </body>
